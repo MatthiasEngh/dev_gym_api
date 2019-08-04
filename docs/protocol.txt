@@ -1,0 +1,8 @@
+how games are played (sketch):
+
+Request Login <> : Gain Login Token
+Request Game List <Login Token> : Gain Game Token List
+Request Match <Login Token, Game Token> : Gain Match Token
+Request Match Details <Login Token, Match Token> : Gain Match Details
+Submit Match Answer <Login Token, Match Token, Answer> : ...
+Poll Match Status <Login Token, Match Token> : Match Status
