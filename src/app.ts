@@ -7,9 +7,15 @@ const port = 3000;
 const server = http.createServer((req: any, res: any) => {
   let path: string = url.parse(req.url).pathname
 
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.end(`${path}\n`);
+  if (/game/i.test(path)) {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('game');
+  } else {
+    res.statusCode = 200;
+    res.setHeader('Content-Type', 'text/plain');
+    res.end('NO MANS LAND, go to /game');
+  }
 });
 
 server.listen(port, hostname, () => {
