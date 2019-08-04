@@ -1,0 +1,15 @@
+Blotto game:
+
+
+Data model:
+
+Game info:
+number of fields
+number of tokens
+
+Player answer:
+Array of values
+
+Background Processing:
+validate answer?
+determine winner
