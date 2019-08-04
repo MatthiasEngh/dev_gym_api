@@ -6,12 +6,15 @@
   "directories": {
     "doc": "docs"
   },
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.19.0"
+  },
   "devDependencies": {
-    "@types/node": "^12.6.9"
+    "@types/node": "^12.6.9",
+    "jest": "^24.8.0"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "tsc",
     "server": "node dist/app.js"
   },
