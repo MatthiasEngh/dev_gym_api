@@ -12,9 +12,7 @@ const server = http.createServer((req: any, res: any) => {
     res.setHeader('Content-Type', 'text/plain');
     res.end('game');
   } else {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('NO MANS LAND, go to /game');
+    res.statusCode = 404;
   }
 });
 
