@@ -1,16 +1,7 @@
-# Ran setup so far:
+# setup:
 ```
-npm install -g typescript
+npm install
 ```
-```
-npm install @types/node --save-dev
-```
-
-TODO:
-setup script
-server script
-
-
 
 # setup db
 create db cluster:
