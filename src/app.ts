@@ -1,5 +1,18 @@
 const http = require('http');
 const url = require('url');
+const { Client } = require('pg')
+
+const client = new Client({
+  user: 'dev_gym_api',
+  host: '127.0.0.1',
+  database: 'dev_gym_api',
+  port: '5432',
+})
+
+async function connect_client() {
+  await client.connect()
+}
+connect_client()
 
 const hostname = '127.0.0.1';
 const port = 3000;
