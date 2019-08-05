@@ -21,9 +21,10 @@ const server = http.createServer(async (req: any, res: any) => {
   if (/^\/match/i.test(path)) {
     let res = await client.query("SELECT * FROM matches LIMIT 1")
 
-    if(res[0] != null) {
+    if(res.rows.length > 0) {
       status = 200
     } else {
+      await client.query("INSERT INTO matches (game_id) VALUES (uuid_generate_v1())")
       status = 204
     }
   } else {
