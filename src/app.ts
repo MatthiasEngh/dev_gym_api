@@ -7,7 +7,7 @@ const port = 3000;
 const server = http.createServer((req: any, res: any) => {
   let path: string = url.parse(req.url).pathname
 
-  if (/^\/game/i.test(path)) {
+  if (/^\/match/i.test(path)) {
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     res.end('game');
