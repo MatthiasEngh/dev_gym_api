@@ -8,22 +8,26 @@ const client = new Client({
   database: 'dev_gym_api',
   port: '5432',
 })
-
-async function connect_client() {
-  await client.connect()
-}
-connect_client()
+client.connect()
 
 const hostname = '127.0.0.1';
 const port = 3000;
 
-const server = http.createServer((req: any, res: any) => {
+const server = http.createServer(async (req: any, res: any) => {
   let path: string = url.parse(req.url).pathname
   let body: string
-  let status: number
+  let status: number = 500
 
   if (/^\/match/i.test(path)) {
-    status = 204
+    let res = await client.query("SELECT * FROM matches LIMIT 1")
+    client.end()
+    console.log(res)
+
+    if(res[0] != null) {
+      status = 200
+    } else {
+      status = 204
+    }
   } else {
     status = 404
     body = 'NO MANS LAND, go to /game'
