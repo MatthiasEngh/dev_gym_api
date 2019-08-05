@@ -6,16 +6,19 @@ const port = 3000;
 
 const server = http.createServer((req: any, res: any) => {
   let path: string = url.parse(req.url).pathname
+  let body: string
+  let status: number
 
   if (/^\/match/i.test(path)) {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('game');
+    status = 204
   } else {
-    res.statusCode = 404;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('NO MANS LAND, go to /game');
+    status = 404
+    body = 'NO MANS LAND, go to /game'
   }
+
+  res.setHeader('Content-Type', 'text/plain');
+  res.statusCode = status;
+  res.end(body);
 });
 
 server.listen(port, hostname, () => {
