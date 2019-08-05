@@ -35,4 +35,6 @@ db/migrations.sh
 (todo: create migration script in scripts and create separate migrations)
 
 inspect db interactively:
+```
 scripts/inspect_db.sh
+```
