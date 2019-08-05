@@ -20,8 +20,6 @@ const server = http.createServer(async (req: any, res: any) => {
 
   if (/^\/match/i.test(path)) {
     let res = await client.query("SELECT * FROM matches LIMIT 1")
-    client.end()
-    console.log(res)
 
     if(res[0] != null) {
       status = 200
