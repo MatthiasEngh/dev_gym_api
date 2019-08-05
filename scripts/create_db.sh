@@ -1,5 +1,6 @@
 DATABASE="dev_gym_api"
+DB_USER="dev_gym_api"
 createdb $DATABASE
 psql -d $DATABASE -c 'CREATE EXTENSION IF NOT EXISTS "uuid-ossp"'
-psql -d $DATABASE -c 'CREATE ROLE dev_gym_api WITH LOGIN'
-
+psql -d $DATABASE -c "CREATE ROLE $DB_USER"
+psql -d $DATABASE -c "GRANT SELECT, INSERT ON ALL TABLES IN SCHEMA public TO $DB_USER"
