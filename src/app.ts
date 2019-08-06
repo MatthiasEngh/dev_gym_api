@@ -20,8 +20,11 @@ const server = http.createServer(async (req: any, res: any) => {
   let status: number = 500
 
   if (/^\/match/i.test(path)) {
-    let res = await client.query("SELECT * FROM matches WHERE open='true' LIMIT 1")
-    let open_match = res.rows[0]
+    // if player is enrolled in match return 200/204 depending on existing match status
+    // if player is not enrolled in match, enroll in open match or create new and return status 200/204
+
+    let open_match_result = await client.query("SELECT * FROM matches WHERE open='true' LIMIT 1")
+    let open_match = open_match_result.rows[0]
 
     if(open_match) {
       await client.query(`UPDATE matches SET open='false' WHERE match_id='${open_match.match_id}'`)
