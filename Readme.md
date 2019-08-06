@@ -29,3 +29,8 @@ inspect db interactively:
 ```
 scripts/inspect_db.sh
 ```
+
+# run tests:
+```
+npm run tests
+```
