@@ -2,7 +2,11 @@ const http = require('http')
 const axios = require('axios')
 
 // TODO: does below line work?
-//require('./') // start server 
+var server = null
+beforeAll(() => {
+  server = require('../dist/app.js') // start server 
+})
+  
 test('bad auth', async () => {
   const response = await axios.get(
     'http://127.0.0.1:3000',
@@ -94,5 +98,6 @@ async function getAuthToken() { // TODO: does this return a new user each time?
   return authResponse.data.token
 }
 
-
-
+afterAll(() => {
+  server.close()
+})
