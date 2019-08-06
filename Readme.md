@@ -29,3 +29,13 @@ inspect db interactively:
 ```
 scripts/inspect_db.sh
 ```
+
+# run http tests:
+start server
+```
+node dist/app.js
+```
+run tests
+```
+npm run tests
+```
