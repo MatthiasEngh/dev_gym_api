@@ -31,7 +31,6 @@ const server = http.createServer(async (req: any, res: any) => {
     }
   } else {
     status = 404
-    body = 'NO MANS LAND, go to /game'
   }
 
   res.setHeader('Content-Type', 'text/plain');
