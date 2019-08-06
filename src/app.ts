@@ -1,10 +1,10 @@
-const http = require('http');
-const url = require('url');
+const http = require('http')
+const url = require('url')
 const { Client } = require('pg')
 
-const hostname = '127.0.0.1';
+const hostname = '127.0.0.1'
 const db_host = hostname
-const port = 3000;
+const port = 3000
 
 const client = new Client({
   user: 'dev_gym_api',
@@ -34,11 +34,11 @@ const server = http.createServer(async (req: any, res: any) => {
     status = 404
   }
 
-  res.setHeader('Content-Type', 'text/plain');
-  res.statusCode = status;
-  res.end(body);
-});
+  res.setHeader('Content-Type', 'text/plain')
+  res.statusCode = status
+  res.end(body)
+})
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`)
-});
+})
