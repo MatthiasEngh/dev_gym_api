@@ -19,9 +19,11 @@ const server = http.createServer(async (req: any, res: any) => {
   let status: number = 500
 
   if (/^\/match/i.test(path)) {
-    let res = await client.query("SELECT * FROM matches LIMIT 1")
+    let res = await client.query("SELECT * FROM matches WHERE open='true' LIMIT 1")
+    let open_match = res.rows[0]
 
-    if(res.rows.length > 0) {
+    if(open_match) {
+      await client.query(`UPDATE matches SET open='false' WHERE match_id='${open_match.match_id}'`)
       status = 200
     } else {
       await client.query("INSERT INTO matches (game_id) VALUES (uuid_generate_v1())")
