@@ -14,17 +14,28 @@ const client = new Client({
 })
 client.connect()
 
-const player1: Array<any>
-const player2: Array<any>
-const results: Array<number>
+const player1: Array<any> = []
+const player2: Array<any> = []
+const results: Array<number> = []
 
 const server = http.createServer(async (req: any, res: any) => {
-  let path: string = url.parse(req.url).pathname
-  let body: string
-  let status: number = 500
+  var path: string = url.parse(req.url).pathname
+  var body: string
+  var status: number = 500
 
   if (/^\/game/i.test(path)) {
     // store game data
+    var game_data: string = ""
+    req.on('data', function (data: string) {
+      game_data += data
+    })
+
+    req.on('end', function () {
+      setGameData(
+        path.match(/^\/game\/([a-z]+)/i)[1],
+        JSON.parse(game_data)
+       )
+    })
   } else if(/^\/results/i.test(path)) {
     // return game results in body
   } else {
@@ -40,17 +51,19 @@ server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`)
 })
 
-const setGameData(player_id, game_data) {
+function setGameData(player_id: string, game_data: Array<number>) {
   // store game data in a way sorted by player
+  console.log("player_id: ", player_id)
+  console.log("game_data: ", game_data)
 }
 
-const updateGameResults() {
+function updateGameResults() {
   // update game results
   // if min(submission_count(player1), submission_count(player2)) > game results
   // then determine winners for gamees without resultl
   // then store results
 }
 
-const getGameResults() {
+function getGameResults() {
   // return game results
 }
