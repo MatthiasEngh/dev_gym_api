@@ -35,9 +35,10 @@ const server = http.createServer(async (req: any, res: any) => {
         path.match(/^\/game\/([a-z]+)/i)[1],
         JSON.parse(game_data)
        )
+      updateGameResults()
     })
   } else if(/^\/results/i.test(path)) {
-    // return game results in body
+    body = getGameResults()
   } else {
     status = 404
   }
