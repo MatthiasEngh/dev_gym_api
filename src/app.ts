@@ -14,6 +14,10 @@ const client = new Client({
 })
 client.connect()
 
+const player1: Array<any>
+const player2: Array<any>
+const results: Array<number>
+
 const server = http.createServer(async (req: any, res: any) => {
   let path: string = url.parse(req.url).pathname
   let body: string
