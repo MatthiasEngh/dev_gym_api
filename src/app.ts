@@ -37,11 +37,9 @@ const server = http.createServer(async (req: any, res: any) => {
         path.match(/^\/game\/([a-z]+)/i)[1],
         JSON.parse(game_data)
        )) {
-        console.log("BOOBS!")
         updateGameResults()
         status = 200
       } else {
-        console.log("ASS")
         status = 404
       }
       res.statusCode = status
@@ -80,7 +78,6 @@ function updateGameResults() {
   if(count_both_players > results.length) {
     for(var i = results.length; i < count_both_players; i++) {
       results.push(calculateWinner(player1[i], player2[i]))
-      console.log(results)
     }
   }
 }
