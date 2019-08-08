@@ -16,7 +16,7 @@ client.connect()
 
 const player1: Array<any> = []
 const player2: Array<any> = []
-const results: Array<number> = []
+const results: Array<string> = []
 
 const server = http.createServer(async (req: any, res: any) => {
   var path: string = url.parse(req.url).pathname
@@ -76,10 +76,33 @@ function setGameData(player_id: string, game_data: Array<number>): boolean {
 }
 
 function updateGameResults() {
-  // update game results
-  // if min(submission_count(player1), submission_count(player2)) > game results
-  // then determine winners for gamees without resultl
-  // then store results
+  var count_both_players: number = Math.min(player1.length, player2.length)
+  if(count_both_players > results.length) {
+    for(var i = results.length; i < count_both_players; i++) {
+      results.push(calculateWinner(player1[i], player2[i]))
+      console.log(results)
+    }
+  }
+}
+
+function calculateWinner(player1_submission: Array<number>, player2_submission: Array<number>): string {
+  var battlefield_count = 100
+  var player1_victories = 0
+  var player2_victories = 0
+  for (var i = 0; i < battlefield_count; i ++) {
+    if(player1_submission[i] > player2_submission[i]) {
+      player1_victories += 1
+    } else if (player2_submission[i] > player1_submission[i]) {
+      player2_victories += 1
+    }
+  }
+  if(player1_victories > player2_victories) {
+    return "briceMAN"
+  } else if(player2_victories > player1_victories) {
+    return "matDUDE"
+  }
+
+  return "Both players suck"
 }
 
 function getGameResults(): string {
