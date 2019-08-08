@@ -14,8 +14,8 @@ const client = new Client({
 })
 client.connect()
 
-const player1: Array<any> = []
-const player2: Array<any> = []
+const player1: Array<Array<number>> = []
+const player2: Array<Array<number>> = []
 const results: Array<string> = []
 
 const server = http.createServer(async (req: any, res: any) => {
@@ -33,14 +33,14 @@ const server = http.createServer(async (req: any, res: any) => {
     })
 
     req.on('end', function () {
-      game_data = JSON.parse(game_data)
-      if (!(validateGameData(game_data))) {
+      const game_data_array: Array<number> = JSON.parse(game_data)
+      if (!(validateGameData(game_data_array))) {
 	status = 400
 	body = "Game data not valid"
       }
       else if (setGameData(
         path.match(/^\/game\/([a-z]+)/i)[1],
-        game_data
+        game_data_array
        )) {
         updateGameResults()
         status = 200
@@ -52,6 +52,8 @@ const server = http.createServer(async (req: any, res: any) => {
     })
   } else if(/^\/results/i.test(path)) {
     body = getGameResults()
+    if (body) status = 200 // results may be empty
+    else status = 204 
     res.statusCode = status
     res.end(body)
   } else {
@@ -108,7 +110,7 @@ function calculateWinner(player1_submission: Array<number>, player2_submission: 
 }
 
 function getGameResults(): string {
-  return ""
+  return JSON.stringify(results)
 }
 
 function validateGameData(game_data: Array<number>): boolean {
