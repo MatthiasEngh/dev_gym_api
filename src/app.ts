@@ -114,7 +114,7 @@ function getGameResults(): string {
 function validateGameData(game_data: Array<number>): boolean {
   if (game_data.length != 100 || // limit 100 battlefields
       game_data.reduce((a, b) => a + b, 0) > 100  || // limit 100 soldiers
-      !(game_data.filter(a => a % 1 != 0))) // all elements are integers
+      (game_data.filter(a => a % 1 != 0))) // all elements are integers
     return false
   else
     return true
