@@ -52,6 +52,8 @@ const server = http.createServer(async (req: any, res: any) => {
     })
   } else if(/^\/results/i.test(path)) {
     body = getGameResults()
+    if (body) status = 200 // results may be empty
+    else status = 204 
     res.statusCode = status
     res.end(body)
   } else {
@@ -108,7 +110,7 @@ function calculateWinner(player1_submission: Array<number>, player2_submission: 
 }
 
 function getGameResults(): string {
-  return ""
+  return JSON.stringify(results)
 }
 
 function validateGameData(game_data: Array<number>): boolean {
