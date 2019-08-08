@@ -33,9 +33,14 @@ const server = http.createServer(async (req: any, res: any) => {
     })
 
     req.on('end', function () {
-      if(setGameData(
+      game_data = JSON.parse(game_data)
+      if (!(validateGameData(game_data))) {
+	status = 400
+	body = "Game data not valid"
+      }
+      else if (setGameData(
         path.match(/^\/game\/([a-z]+)/i)[1],
-        JSON.parse(game_data)
+        game_data
        )) {
         updateGameResults()
         status = 200
@@ -104,4 +109,13 @@ function calculateWinner(player1_submission: Array<number>, player2_submission: 
 
 function getGameResults(): string {
   return ""
+}
+
+function validateGameData(game_data: Array<number>): boolean {
+  if (game_data.length != 100 || // limit 100 battlefields
+      game_data.reduce((a, b) => a + b, 0) > 100  || // limit 100 soldiers
+      (game_data.filter(a => a % 1 != 0))) // all elements are integers
+    return false
+  else
+    return true
 }
