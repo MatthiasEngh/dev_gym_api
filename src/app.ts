@@ -23,6 +23,8 @@ const server = http.createServer(async (req: any, res: any) => {
   var body: string
   var status: number = 500
 
+  res.setHeader('Content-Type', 'text/plain')
+
   if (/^\/game/i.test(path)) {
     // store game data
     var game_data: string = ""
@@ -31,31 +33,46 @@ const server = http.createServer(async (req: any, res: any) => {
     })
 
     req.on('end', function () {
-      setGameData(
+      if(setGameData(
         path.match(/^\/game\/([a-z]+)/i)[1],
         JSON.parse(game_data)
-       )
-      updateGameResults()
+       )) {
+        console.log("BOOBS!")
+        updateGameResults()
+        status = 200
+      } else {
+        console.log("ASS")
+        status = 404
+      }
+      res.statusCode = status
+      res.end(body)
     })
   } else if(/^\/results/i.test(path)) {
     body = getGameResults()
+    res.statusCode = status
+    res.end(body)
   } else {
     status = 404
+    res.statusCode = status
+    res.end(body)
   }
-
-  res.setHeader('Content-Type', 'text/plain')
-  res.statusCode = status
-  res.end(body)
 })
 
 server.listen(port, hostname, () => {
   console.log(`Server running at http://${hostname}:${port}/`)
 })
 
-function setGameData(player_id: string, game_data: Array<number>) {
+function setGameData(player_id: string, game_data: Array<number>): boolean {
   // store game data in a way sorted by player
-  console.log("player_id: ", player_id)
-  console.log("game_data: ", game_data)
+  if(player_id == "bricehaslice") {
+    player1.push(game_data)
+    return true
+  } else if(player_id == "matisfat") {
+    player2.push(game_data)
+    return true
+  } else {
+    return false
+  }
 }
 
 function updateGameResults() {
@@ -65,6 +82,6 @@ function updateGameResults() {
   // then store results
 }
 
-function getGameResults() {
-  // return game results
+function getGameResults(): string {
+  return ""
 }
