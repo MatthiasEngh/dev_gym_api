@@ -37,7 +37,7 @@ describe('player one is defending', () => {
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
     assert(newOwnership).isEqual(playerOneOwnership)
-    assert(soldiers).isEqual(0)
+    assert(soldiers).isEqual(soldiersOne + 1)
   })
 })
 
@@ -54,7 +54,7 @@ describe('player two is defending', () => {
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
     assert(newOwnership).isEqual(playerOneOwnership)
-    assert(soldiers).isEqual(soldiersOne)
+    assert(soldiers).isEqual(soldiersOne + 1)
   })
 
   it('player two sends more', () => {
@@ -70,7 +70,7 @@ describe('player two is defending', () => {
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
     assert(newOwnership).isEqual(playerTwoOwnership)
-    assert(soldiers).isEqual(0)
+    assert(soldiers).isEqual(soldiersTwo + 1)
   })
 })
 
@@ -80,3 +80,35 @@ describe('player two is defending', () => {
 //      player one sends more
 //      player two sends more
 //      equal soldiers sent
+
+// winner gets extra soldier?
+// owner if no one sends soldiers?
+
+describe('no one is defending', () => {
+  const prevOwnership = noOwnership
+
+  it('player one sends more', () => {
+    const soldiersOne = 5
+    const soldiersTwo = 4
+    const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
+    assert(newOwnership).isEqual(playerOneOwnership)
+    assert(soldiers).isEqual(soldiersOne + 1)
+  })
+
+  it('player two sends more', () => {
+    const soldiersOne = 4
+    const soldiersTwo = 5
+    const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
+    assert(newOwnership).isEqual(playerTwoOwnership)
+    assert(soldiers).isEqual(soldiersTwo + 1)
+  })
+
+  it('equal soldiers sent', () => {
+    const soldiersOne = 4
+    const soldiersTwo = 4
+    const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
+    assert(newOwnership).isEqual(noOwnership)
+    assert(soldiers).isEqual(0)
+  })
+})
+
