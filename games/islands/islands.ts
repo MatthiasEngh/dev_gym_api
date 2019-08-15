@@ -39,9 +39,14 @@
 //   }
 // }
 
-import {IslandData, SoldierCount, StateData} from "./interfaces"
 
-function main(input: StateData) {
+function nodeResult(prevOwnership: number, playerOneSoldiers: number, playerTwoSoldiers: number): number {
+  const pOne = playerOneSoldiers
+  const pTwo = playerTwoSoldiers
+  if (pOne > pTwo)
+    return 1
+  else if (pTwo > pOne)
+    return 2
+  else
+    return prevOwnership
 }
-  
-function nodeCalculation(){}
