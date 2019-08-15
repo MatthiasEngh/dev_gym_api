@@ -3,6 +3,7 @@
 // const ownership = [0,1,2, ...]
 // const soldiers = [0,42,3, ...]
 
+import {nodeResult} from '../games/islands/islands'
 
 
 const playerOneOwnership = 1
@@ -20,24 +21,24 @@ describe('player one is defending', () => {
     const soldiersOne = 5
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(prevOwnership)
-    assert(soldiers).isEqual(soldiersOne + 1)
+    expect(newOwnership).toBe(prevOwnership)
+    expect(soldiers).toBe(soldiersOne + 1)
   })
 
   it('player two sends more', () => {
     const soldiersOne = 4
     const soldiersTwo = 5
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(playerTwoOwnership)
-    assert(soldiers).isEqual(soldiersTwo + 1)
+    expect(newOwnership).toBe(playerTwoOwnership)
+    expect(soldiers).toBe(soldiersTwo + 1)
   })
 
   it('equal soldiers sent', () => { // defender wins by default
     const soldiersOne = 4
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(playerOneOwnership)
-    assert(soldiers).isEqual(soldiersOne + 1)
+    expect(newOwnership).toBe(playerOneOwnership)
+    expect(soldiers).toBe(soldiersOne + 1)
   })
 })
 
@@ -53,24 +54,24 @@ describe('player two is defending', () => {
     const soldiersOne = 5
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(playerOneOwnership)
-    assert(soldiers).isEqual(soldiersOne + 1)
+    expect(newOwnership).toBe(playerOneOwnership)
+    expect(soldiers).toBe(soldiersOne + 1)
   })
 
   it('player two sends more', () => {
     const soldiersOne = 4
     const soldiersTwo = 5
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(playerTwoOwnership)
-    assert(soldiers).isEqual(soldiersTwo + 1)
+    expect(newOwnership).toBe(playerTwoOwnership)
+    expect(soldiers).toBe(soldiersTwo + 1)
   })
 
   it('equal soldiers sent', () => {
     const soldiersOne = 4
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(playerTwoOwnership)
-    assert(soldiers).isEqual(soldiersTwo + 1)
+    expect(newOwnership).toBe(playerTwoOwnership)
+    expect(soldiers).toBe(soldiersTwo + 1)
   })
 })
 
@@ -91,24 +92,24 @@ describe('no one is defending', () => {
     const soldiersOne = 5
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(playerOneOwnership)
-    assert(soldiers).isEqual(soldiersOne + 1)
+    expect(newOwnership).toBe(playerOneOwnership)
+    expect(soldiers).toBe(soldiersOne + 1)
   })
 
   it('player two sends more', () => {
     const soldiersOne = 4
     const soldiersTwo = 5
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(playerTwoOwnership)
-    assert(soldiers).isEqual(soldiersTwo + 1)
+    expect(newOwnership).toBe(playerTwoOwnership)
+    expect(soldiers).toBe(soldiersTwo + 1)
   })
 
   it('equal soldiers sent', () => {
     const soldiersOne = 4
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
-    assert(newOwnership).isEqual(noOwnership)
-    assert(soldiers).isEqual(0)
+    expect(newOwnership).toBe(noOwnership)
+    expect(soldiers).toBe(0)
   })
 })
 
