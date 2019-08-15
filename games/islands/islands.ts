@@ -39,7 +39,9 @@
 //   }
 // }
 
+import {IslandData, SoldierCount, StateData} from "./interfaces"
 
-function main(input: MoveData) {
+function main(input: StateData) {
 }
   
+function nodeCalculation(){}
