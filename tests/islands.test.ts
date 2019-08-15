@@ -29,7 +29,7 @@ describe('player one is defending', () => {
     const soldiersTwo = 5
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
     assert(newOwnership).isEqual(playerTwoOwnership)
-    assert(soldiers).isEqual(soldiersTwo)
+    assert(soldiers).isEqual(soldiersTwo + 1)
   })
 
   it('equal soldiers sent', () => { // defender wins by default
@@ -54,7 +54,7 @@ describe('player two is defending', () => {
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
     assert(newOwnership).isEqual(playerOneOwnership)
-    assert(soldiers).isEqual(soldiersOne)
+    assert(soldiers).isEqual(soldiersOne + 1)
   })
 
   it('player two sends more', () => {
@@ -92,7 +92,7 @@ describe('no one is defending', () => {
     const soldiersTwo = 4
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
     assert(newOwnership).isEqual(playerOneOwnership)
-    assert(soldiers).isEqual(soldiersOne)
+    assert(soldiers).isEqual(soldiersOne + 1)
   })
 
   it('player two sends more', () => {
@@ -100,7 +100,7 @@ describe('no one is defending', () => {
     const soldiersTwo = 5
     const [newOwnership, soldiers] = nodeResult(prevOwnership, soldiersOne, soldiersTwo)
     assert(newOwnership).isEqual(playerTwoOwnership)
-    assert(soldiers).isEqual(soldiersTwo)
+    assert(soldiers).isEqual(soldiersTwo + 1)
   })
 
   it('equal soldiers sent', () => {
